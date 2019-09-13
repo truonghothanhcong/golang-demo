@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+service DbWorkerService {
+    rpc GetUsers (GetUsersRequest) returns (GetUsersResponse);
+    rpc AddUser (AddUserRequest) returns (AddUserResponse);
+
+    rpc GetDiscussions (GetDiscussionsRequest) returns (GetDiscussionsResponse);
+    rpc AddDiscussion (AddDiscussionRequest) returns (AddDiscussionResponse);
+}
+
+message User {
+    int32 Id = 1;
+    string Username = 2;
+    string Email = 3;
+    string FullName = 4;
+    string Birthday = 5;
+	bool IsSuperUser  = 6;
+}
+
+message Discussion {
+    int32 Id = 1;
+    string Name = 2;
+    string Content = 3;
+    int32 IdUserCreated = 4;
+    int32 Views = 5;
+    int32 Votes = 6;
+    int32 Reports = 7;
+    bool IsDeleted = 8;
+}
+
+message ResponseCode {
+    int32 Code = 1;
+    string Msg = 2;
+}
+
+message GetUsersRequest {
+
+}
+
+message GetUsersResponse {
+    ResponseCode ResCode = 1;
+    repeated User Users = 2;
+}
+
+message AddUserRequest {
+    string Username = 1;
+    string Email = 2;
+    string FullName = 3;
+    string Password = 4;
+}
+
+message AddUserResponse {
+    ResponseCode ResCode = 1;
+    User User = 2;
+}
+
+message GetDiscussionsRequest {
+
+}
+
+message GetDiscussionsResponse {
+    ResponseCode ResCode = 1;
+    repeated Discussion Discussions = 2;
+}
+
+message AddDiscussionRequest {
+    string Name = 1;
+    string Content = 2;
+    int32 IdUserCreated = 3;
+}
+
+message AddDiscussionResponse {
+    ResponseCode ResCode = 1;
+    Discussion Discussion = 2;
+}
